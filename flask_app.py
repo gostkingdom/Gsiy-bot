@@ -3,7 +3,7 @@ import telebot
 from flask import Flask, request
 
 # Apna BotFather wala token yahan daalein
-TOKEN = '8993937365:AAFPQAXEV3Jx90JhJ8A-Ep-71732gu7W5R4'
+TOKEN = '8993937365:AAF9SRPiRPcN2z4AxEs3aX9q1Ql__ZJ3ShE'
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
 
