@@ -47,7 +47,7 @@ def telegram_webhook():
     bot.process_new_updates([update])
     return '!', 200
 
-# Setup Webhook Route with Error Handling
+# Setup Webhook Route (Error ko screen par dikhane ke liye status 200 kiya hai)
 @app.route('/')
 def setup_webhook():
     try:
@@ -56,7 +56,7 @@ def setup_webhook():
         bot.set_webhook(url=render_url + '/' + TOKEN)
         return 'Webhook setup successfully on Render!', 200
     except Exception as e:
-        return f"Webhook Error: {str(e)}", 500
+        return f"Webhook Error: {str(e)}", 200
 
 if __name__ == '__main__':
     app.run()
