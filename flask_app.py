@@ -2,7 +2,7 @@ import os
 import telebot
 from flask import Flask, request
 
-# Apna BotFather wala token yahan daalein
+# Apna sahi wala Telegram Bot Token yahan daalein
 TOKEN = '8993937365:AAF9SRPiRPcN2z4AxEs3aX9q1Ql__ZJ3ShE'
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
@@ -47,13 +47,16 @@ def telegram_webhook():
     bot.process_new_updates([update])
     return '!', 200
 
-# Setup Webhook Route
+# Setup Webhook Route with Error Handling
 @app.route('/')
 def setup_webhook():
-    bot.remove_webhook()
-    render_url = os.environ.get('RENDER_EXTERNAL_URL', 'https://apka-app-name.onrender.com')
-    bot.set_webhook(url=render_url + '/' + TOKEN)
-    return 'Webhook setup successfully on Render!', 200
+    try:
+        bot.remove_webhook()
+        render_url = os.environ.get('RENDER_EXTERNAL_URL', 'https://gsiy-bot.onrender.com')
+        bot.set_webhook(url=render_url + '/' + TOKEN)
+        return 'Webhook setup successfully on Render!', 200
+    except Exception as e:
+        return f"Webhook Error: {str(e)}", 500
 
 if __name__ == '__main__':
     app.run()
